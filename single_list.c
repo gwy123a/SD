@@ -102,6 +102,38 @@ int detele_list_node(L * pH , int data)
 	return -1 ;
 }
  
+void trave_list(L * pH)
+{
+	//save the first node position 
+	L *p = pH->next;
+	L *pBack;
+	int i = 0 ;
+	if(p->next == NULL || p == NULL)
+		return ;
+		
+	while(NULL != p->next) //Traverse the linked list 
+	{
+		//Save next node of the first node 
+		pBack = p->next ; 
+		//Find the first valid node, which is the next node of the head pointer 
+		if(p == pH->next) 
+		{
+			//Because there is only one node，so it pointer to NULL
+			p->next = NULL ; 
+		} 
+		else
+		{
+			/*
+			new->next = p->next ;
+			p->next = new ;
+			*/
+			p->next = pH->next ; //Tail connection 
+		}
+		pH->next = p ; //Head connection 
+		p = pBack ; //go to the next node
+	}
+	top_insert(pH,p); //insert the last node 
+}
 
 int main(int argc , char **argv) 
 {
